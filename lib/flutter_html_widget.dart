@@ -123,7 +123,11 @@ class _HtmlParser {
         // NOTE assuming img with width=height=11 as inline image icon
 
         final isInlineIcon = (element.attributes['height'] == "11" && element.attributes['width'] == "11");
-        final imgSrc = 'https:' + element.attributes['src'];
+        final _imgsrc = element.attributes['src'].toLowerCase();
+        String imgSrc = 'https:' + element.attributes['src'];
+        if(_imgsrc.startsWith('http') || _imgsrc.startsWith('https')){
+          imgSrc=element.attributes['src'];
+        }
 
         if ( isInlineIcon ) {
           // TODO REPLY ON VENDOR
